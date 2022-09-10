@@ -24,6 +24,8 @@ import javax.swing.border.EtchedBorder;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class JavaCRUD {
 
@@ -229,14 +231,23 @@ public class JavaCRUD {
 		frame.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel lblNewLabel_1_1_1 = new JLabel("Search Students:");
+		JLabel lblNewLabel_1_1_1 = new JLabel("Search Id:");
 		lblNewLabel_1_1_1.setFont(new Font("Franklin Gothic Book", Font.PLAIN, 14));
 		lblNewLabel_1_1_1.setBounds(10, 20, 104, 33);
 		panel_1.add(lblNewLabel_1_1_1);
 		
 		txtSearch = new JTextField();
+		txtSearch.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				
+				try {
+					String id;
+				}
+			}
+		});
 		txtSearch.setColumns(10);
-		txtSearch.setBounds(124, 27, 202, 20);
+		txtSearch.setBounds(84, 27, 202, 20);
 		panel_1.add(txtSearch);
 		
 		JPanel panel_2 = new JPanel();
@@ -263,5 +274,10 @@ public class JavaCRUD {
 		btnDelete_1.setBackground(Color.GRAY);
 		btnDelete_1.setBounds(544, 334, 90, 35);
 		frame.getContentPane().add(btnDelete_1);
+		
+		JLabel lblNewLabel_3 = new JLabel("Student Table");
+		lblNewLabel_3.setFont(new Font("Sitka Small", Font.PLAIN, 18));
+		lblNewLabel_3.setBounds(475, 76, 163, 24);
+		frame.getContentPane().add(lblNewLabel_3);
 	}
 }
