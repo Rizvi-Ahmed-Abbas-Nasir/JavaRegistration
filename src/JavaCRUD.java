@@ -204,14 +204,30 @@ public class JavaCRUD {
 		btnNewButton.setBounds(28, 178, 90, 35);
 		panel.add(btnNewButton);
 		
-		JButton btnDelete = new JButton("Delete");
+		JButton btnDelete = new JButton("Exit");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				System.exit(0);
+			}
+		});
 		btnDelete.setForeground(new Color(255, 255, 255));
 		btnDelete.setFont(new Font("Yu Gothic UI", Font.BOLD, 15));
 		btnDelete.setBackground(Color.GRAY);
 		btnDelete.setBounds(228, 178, 90, 35);
 		panel.add(btnDelete);
 		
-		JButton btnEdit = new JButton("Edit");
+		JButton btnEdit = new JButton("Clear");
+		btnEdit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				textName.setText("");
+				textEn.setText("");
+				textClass.setText("");
+				txtBatch.setText("");
+				textName.requestFocus();
+			}
+		});
 		btnEdit.setForeground(new Color(255, 255, 255));
 		btnEdit.setFont(new Font("Yu Gothic UI", Font.BOLD, 15));
 		btnEdit.setBackground(Color.GRAY);
@@ -242,8 +258,40 @@ public class JavaCRUD {
 			public void keyReleased(KeyEvent e) {
 				
 				try {
-					String id;
+					String id = txtSearch.getText();
+						
+						pst = con.prepareStatement("select Name,EnrollNo,Class,Batch from student_regs where id = ? ");
+						pst.setString(1, id);
+						ResultSet rs = pst.executeQuery();
+						
+						if(rs.next() == true) {
+							String Name = rs.getString(1);
+							String EnrollNo = rs.getString(2);
+							String Class = rs.getString(3);
+							String Batch = rs.getString(4);
+							
+							textName.setText(Name);
+							textEn.setText(EnrollNo);
+							textClass.setText(Class);
+							txtBatch.setText(Batch);
+							
+							
+						}
+						else {
+							textName.setText("");
+							textEn.setText("");
+							textClass.setText("");
+							txtBatch.setText("");
+							
+						}
 				}
+				catch (SQLException SE) {
+					// TODO: handle exception
+				} {
+					
+				}
+				
+				
 			}
 		});
 		txtSearch.setColumns(10);
@@ -261,14 +309,83 @@ public class JavaCRUD {
 		lblNewLabel_2.setBounds(10, 11, 310, 32);
 		panel_2.add(lblNewLabel_2);
 		
-		JButton btnNewButton_1 = new JButton("Save");
-		btnNewButton_1.setForeground(Color.WHITE);
-		btnNewButton_1.setFont(new Font("Yu Gothic UI", Font.BOLD, 15));
-		btnNewButton_1.setBackground(SystemColor.controlDkShadow);
-		btnNewButton_1.setBounds(438, 334, 90, 35);
-		frame.getContentPane().add(btnNewButton_1);
+		JButton UpdateButton = new JButton("Update");
+		UpdateButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				String StName,stENo,Stclass,stbatch,bid;
+				
+				
+				StName = textName.getText();
+				stENo = textEn.getText();
+				Stclass = textClass.getText();
+				stbatch = txtBatch.getText();
+				bid = txtSearch.getText();
+				
+				
+				try {
+					pst = con.prepareStatement("update student_regs set Name = ?,EnrollNo = ?,Class = ?,Batch = ? where id = ?");
+					pst.setString(1, StName);
+					pst.setString(2, stENo);
+					pst.setString(3, Stclass);
+					pst.setString(4, stbatch);
+					pst.setString(5, bid);
+					pst.executeUpdate();
+					JOptionPane.showMessageDialog(null, "Record Updated Successfully!");
+					table_Load();
+					textName.setText("");
+					textEn.setText("");
+					textClass.setText("");
+					txtBatch.setText("");
+					textName.requestFocus();
+				}
+				
+				catch(SQLException e1) {
+					e1.printStackTrace();
+				}
+				
+				
+			}
+		});
+		UpdateButton.setForeground(Color.WHITE);
+		UpdateButton.setFont(new Font("Yu Gothic UI", Font.BOLD, 15));
+		UpdateButton.setBackground(SystemColor.controlDkShadow);
+		UpdateButton.setBounds(438, 334, 90, 35);
+		frame.getContentPane().add(UpdateButton);
 		
 		JButton btnDelete_1 = new JButton("Delete");
+		btnDelete_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				String bid;
+				
+				
+				bid = txtSearch.getText();
+				
+				
+				try {
+					pst = con.prepareStatement("delete from student_regs where id = ?");
+					pst.setString(1, bid);
+					pst.executeUpdate();
+					JOptionPane.showMessageDialog(null, "Record Deleted Successfully!");
+					table_Load();
+					textName.setText("");
+					textEn.setText("");
+					textClass.setText("");
+					txtBatch.setText("");
+					textName.requestFocus();
+				}
+				
+				catch(SQLException e1) {
+					e1.printStackTrace();
+				}
+				
+				
+			}
+			
+		});
 		btnDelete_1.setForeground(Color.WHITE);
 		btnDelete_1.setFont(new Font("Yu Gothic UI", Font.BOLD, 15));
 		btnDelete_1.setBackground(Color.GRAY);
