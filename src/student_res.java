@@ -1,75 +1,47 @@
-import java.awt.EventQueue;
-import java.sql.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-import java.awt.BorderLayout;
-import java.awt.Font;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 import net.proteanit.sql.DbUtils;
 
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.Color;
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
-import javax.swing.border.EtchedBorder;
-import java.awt.SystemColor;
-import java.awt.Window;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.net.PasswordAuthentication;
-
-public class JavaCRUD {
-
-	private JFrame frame1;
-	private JFrame frame2;
+public class student_res {
+	
+	private JFrame frame;
 	private JTextField textName;
 	private JTextField textEn;
 	private JTextField textClass;
 	private JTextField txtBatch;
 	private JTable table;
 	private JTextField txtSearch;
-
-	/**
-	 * Launch the application.
-	 * @wbp.parser.entryPoint
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-//					JavaCRUD window = new JavaCRUD();
-					IDandPassword idandPassword = new IDandPassword();
-					LoginPage LoginPage = new LoginPage(idandPassword.getlogininfo());
-//					student_res window2 = new student_res();
-//					window.frame1.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public JavaCRUD() {
-//		initialize();
-		 Connect();
-		 table_Load();
+	
+	
+	
+	public student_res() {
+		initialize();
+		Connect();
+		table_Load();
 	}
 	
-
 	Connection con;
 	PreparedStatement pst;
 	ResultSet rs;
@@ -107,44 +79,27 @@ public class JavaCRUD {
 	}
 		}
 	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	
-	private void initialize2() {
-		frame2 = new JFrame();
-		frame2.setTitle("CRUD Application");
-		frame2.getContentPane().setForeground(new Color(255, 255, 255));
-		frame2.getContentPane().setFont(new Font("Bell MT", Font.BOLD, 23));
-		frame2.setBounds(100, 100, 745, 516);
-		frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame2.getContentPane().setLayout(null);
-		
-
-	
-		
-	}
-	
-	private void initialize() {
-		frame1 = new JFrame();
-		frame1.setTitle("CRUD Application");
-		frame1.getContentPane().setForeground(new Color(255, 255, 255));
-		frame1.getContentPane().setFont(new Font("Bell MT", Font.BOLD, 23));
-		frame1.setBounds(100, 100, 745, 516);
-		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame1.getContentPane().setLayout(null);
+	public void initialize() {
+		frame = new JFrame();
+		frame.setVisible(true);
+		frame.setTitle("CRUD Application");
+		frame.getContentPane().setForeground(new Color(255, 255, 255));
+		frame.getContentPane().setFont(new Font("Bell MT", Font.BOLD, 23));
+		frame.setBounds(100, 100, 745, 516);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Student Registration Application");
 		lblNewLabel.setFont(new Font("Leelawadee", Font.BOLD, 30));
 		lblNewLabel.setBounds(125, 11, 471, 54);
-		frame1.getContentPane().add(lblNewLabel);
+		frame.getContentPane().add(lblNewLabel);
 		
 		JPanel panel = new JPanel();
 		panel.setForeground(new Color(255, 255, 255));
 		panel.setBorder(new TitledBorder(null, "Registration", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(25, 99, 346, 230);
-		frame1.getContentPane().add(panel);
+		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel_1 = new JLabel("Student Name:");
@@ -258,7 +213,7 @@ public class JavaCRUD {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(381, 108, 330, 215);
-		frame1.getContentPane().add(scrollPane);
+		frame.getContentPane().add(scrollPane);
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
@@ -266,7 +221,7 @@ public class JavaCRUD {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Search By Name", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_1.setBounds(22, 340, 349, 68);
-		frame1.getContentPane().add(panel_1);
+		frame.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
 		JLabel lblNewLabel_1_1_1 = new JLabel("Search Id:");
@@ -323,7 +278,7 @@ public class JavaCRUD {
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Author", TitledBorder.LEFT, TitledBorder.BOTTOM, null, new Color(0, 0, 0)));
 		panel_2.setBounds(381, 388, 330, 62);
-		frame1.getContentPane().add(panel_2);
+		frame.getContentPane().add(panel_2);
 		panel_2.setLayout(null);
 		
 		JLabel lblNewLabel_2 = new JLabel("Name: Rizvi Ahmed Abbas");
@@ -374,7 +329,7 @@ public class JavaCRUD {
 		UpdateButton.setFont(new Font("Yu Gothic UI", Font.BOLD, 15));
 		UpdateButton.setBackground(SystemColor.controlDkShadow);
 		UpdateButton.setBounds(438, 334, 90, 35);
-		frame1.getContentPane().add(UpdateButton);
+		frame.getContentPane().add(UpdateButton);
 		
 		JButton btnDelete_1 = new JButton("Delete");
 		btnDelete_1.addActionListener(new ActionListener() {
@@ -412,20 +367,27 @@ public class JavaCRUD {
 		btnDelete_1.setFont(new Font("Yu Gothic UI", Font.BOLD, 15));
 		btnDelete_1.setBackground(Color.GRAY);
 		btnDelete_1.setBounds(544, 334, 90, 35);
-		frame1.getContentPane().add(btnDelete_1);
+		frame.getContentPane().add(btnDelete_1);
 		
 		JLabel lblNewLabel_3 = new JLabel("Student Table");
 		lblNewLabel_3.setFont(new Font("Sitka Small", Font.PLAIN, 18));
 		lblNewLabel_3.setBounds(475, 76, 163, 24);
-		frame1.getContentPane().add(lblNewLabel_3);
+		frame.getContentPane().add(lblNewLabel_3);
 		
 		JButton btnNewButton_1 = new JButton("New button");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				initialize2();
+				
 			}
 		});
 		btnNewButton_1.setBounds(32, 427, 89, 23);
-		frame1.getContentPane().add(btnNewButton_1);
+		frame.getContentPane().add(btnNewButton_1);
 	}
+	
+	
 }
+
+
+
+
+
