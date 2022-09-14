@@ -50,8 +50,8 @@ public class JavaCRUD {
 				try {
 //					JavaCRUD window = new JavaCRUD();
 					IDandPassword idandPassword = new IDandPassword();
-					LoginPage LoginPage = new LoginPage(idandPassword.getlogininfo());
-//					student_res window2 = new student_res();
+					LoginPageStudentRes loginPageStudentRes = new LoginPageStudentRes(idandPassword.getlogininfo());
+//					student_res student_res = new student_res();
 //					window.frame1.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
