@@ -50,7 +50,7 @@ public class JavaCRUD {
 				try {
 //					JavaCRUD window = new JavaCRUD();
 					IDandPassword idandPassword = new IDandPassword();
-					LoginPageStudentRes loginPageStudentRes = new LoginPageStudentRes(idandPassword.getlogininfo());
+					LoginPageStudentRes loginPageStudentRes = new LoginPageStudentRes(idandPassword.logininfo());
 //					student_res student_res = new student_res();
 //					window.frame1.setVisible(true);
 				} catch (Exception e) {

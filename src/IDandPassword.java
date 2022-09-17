@@ -2,14 +2,14 @@ import java.util.HashMap;
 
 public class IDandPassword {
 	
-	HashMap<String,String> logininfoHashMap = new HashMap<String, String>();
+	HashMap<String,String> logininfo = new HashMap<String, String>();
 	
 	public IDandPassword() {
-		logininfoHashMap.put("RizviAhmed", "2005690171");
+		logininfo.put("Rizvi", "1234");
 	}
 	
-	HashMap getlogininfo() {
-		return logininfoHashMap;
+	public  HashMap logininfo() {
+		return logininfo;
 	}
 
 }

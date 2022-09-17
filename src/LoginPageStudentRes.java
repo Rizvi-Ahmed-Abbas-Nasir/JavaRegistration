@@ -16,6 +16,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import com.mysql.cj.x.protobuf.MysqlxNotice.Frame;
+import com.mysql.cj.x.protobuf.MysqlxSession.Reset;
+
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import javax.swing.JPanel;
@@ -25,28 +27,28 @@ import javax.swing.border.TitledBorder;
 
 public class LoginPageStudentRes implements ActionListener{
 	private JFrame LoginFrame;
-	JButton loginButton =  new JButton("Login");
+	JButton Login = new JButton("Login");
 	JButton resButton = new JButton("Reset");
-	JTextField userIdField = new JTextField();
 	JPasswordField userJPasswordField = new JPasswordField();
 	JLabel userIDJLabel = new JLabel("Username");
 	JLabel userPassrdJLabel = new JLabel("Password");
 	JLabel messageLabel = new JLabel();
-	 
-	 
-	
-	HashMap<String, String> logininfoHashMap = new HashMap<String, String>();
 	private JTextField textField;
 	private JTextField textField_1;
-	public LoginPageStudentRes(HashMap<String,String> loginInForOriginal) {
-		LoginPageStudentRes();
-		logininfoHashMap = loginInForOriginal;
+	JButton ResetButton = new JButton("Reset\r\n");
+	 
+	 
+	
+	HashMap<String, String> logininfo = new HashMap<String, String>();
+	
+	/**
+	 * @wbp.parser.entryPoint
+	 */
+	 LoginPageStudentRes(HashMap<String,String> loginInForOriginal){
+		
+		logininfo = loginInForOriginal;
 		
 		
-	}
-	
-	
-	public void LoginPageStudentRes(){
 		LoginFrame = new JFrame();
 		LoginFrame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Rizvi\\Documents\\e325407ddc4e253ebbb41544104bdf6a.jpg"));
 		LoginFrame.setVisible(true);
@@ -93,29 +95,39 @@ public class LoginPageStudentRes implements ActionListener{
 		lblNewLabel_1_1.setBounds(81, 86, 51, 108);
 		panel.add(lblNewLabel_1_1);
 		
-		textField_1 = new JTextField();
-		textField_1.setForeground(Color.WHITE);
-		textField_1.setColumns(10);
-		textField_1.setBackground(Color.WHITE);
-		textField_1.setBounds(125, 142, 232, 27);
-		panel.add(textField_1);
 		
-		JButton btnNewButton = new JButton("Login");
-		btnNewButton.setBackground(Color.WHITE);
-		btnNewButton.setBounds(195, 206, 89, 23);
-		panel.add(btnNewButton);
+		userJPasswordField.setForeground(Color.BLACK);;
+		userJPasswordField.setColumns(10);
+		userJPasswordField.setBackground(Color.WHITE);
+		userJPasswordField.setBounds(125,142,232,27);
+		panel.add(userJPasswordField);
 		
-		JButton btnNewButton_1 = new JButton("Reset\r\n");
-		btnNewButton_1.setBackground(Color.WHITE);
-		btnNewButton_1.setBounds(195, 248, 89, 23);
-		panel.add(btnNewButton_1);
+		
+		Login.setBackground(Color.WHITE);
+		Login.setBounds(195, 206, 89, 23);
+		Login.addActionListener(this);
+		panel.add(Login);
+		
+
+		ResetButton.setBackground(Color.WHITE);
+		ResetButton.setBounds(195, 248, 89, 23);
+		ResetButton.addActionListener(this);
+		panel.add(ResetButton);
+		
+		
+		
+		LoginFrame.setBounds(50, 50, 500, 420);
+		LoginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		messageLabel.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 20));
+		
+		
+		messageLabel.setBounds(172, 299, 158, 23);
+		panel.add(messageLabel);
 		
 		JLabel lblNewLabel = new JLabel("Abbas");
 		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Rizvi\\Documents\\e325407ddc4e253ebbb41544104bdf6a.jpg"));
 		lblNewLabel.setBounds(0, 0, 484, 382);
 		panel.add(lblNewLabel);
-		LoginFrame.setBounds(50, 50, 500, 420);
-		LoginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}
 
@@ -123,6 +135,33 @@ public class LoginPageStudentRes implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
+		if(e.getSource()==ResetButton) {
+			textField.setText("");
+			userJPasswordField.setText("");
+			
+		}
+		if(e.getSource()==Login) {
+			String userID = textField.getText();
+			String password = String.valueOf(userJPasswordField.getPassword());
+			
+			if(logininfo.containsKey(userID)) {
+				if(logininfo.get(userID).equals(password)) {
+					messageLabel.setForeground(Color.green);
+					messageLabel.setText("This Is Working");
+					LoginFrame.dispose();
+					student_res student_res = new student_res();
+				}
+			}
+			else {
+				messageLabel.setForeground(Color.red);
+				messageLabel.setText("Wrong Password");
+			}
+			
+		}
+		else {
+			messageLabel.setForeground(Color.green);
+			messageLabel.setText("Username Not Found");
+		}
 		
 	}
 }
