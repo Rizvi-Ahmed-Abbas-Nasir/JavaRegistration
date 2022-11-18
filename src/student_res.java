@@ -42,7 +42,7 @@ public class student_res {
 		table_Load();
 	}
 	
-	Connection con;
+	Connection con;   
 	PreparedStatement pst;
 	ResultSet rs;
 	String url = "com.mysql.cj.jdbc.Driver";
@@ -290,7 +290,7 @@ public class student_res {
 		UpdateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				
+				 
 				String StName,stENo,Stclass,stbatch,bid;
 				
 				

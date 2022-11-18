@@ -32,7 +32,7 @@ public class LoginPageStudentRes implements ActionListener{
 	JPasswordField userJPasswordField = new JPasswordField();
 	JLabel userIDJLabel = new JLabel("Username");
 	JLabel userPassrdJLabel = new JLabel("Password");
-	JLabel messageLabel = new JLabel();
+	JLabel messageLabel = new JLabel("Rizvi Ahmed Abbas");
 	private JTextField textField;
 	private JTextField textField_1;
 	JButton ResetButton = new JButton("Reset\r\n");
@@ -118,10 +118,10 @@ public class LoginPageStudentRes implements ActionListener{
 		
 		LoginFrame.setBounds(50, 50, 500, 420);
 		LoginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		messageLabel.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 20));
+		messageLabel.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 17));
 		
 		
-		messageLabel.setBounds(172, 299, 158, 23);
+		messageLabel.setBounds(142, 299, 232, 23);
 		panel.add(messageLabel);
 		
 		JLabel lblNewLabel = new JLabel("Abbas");
